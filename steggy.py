@@ -19,10 +19,8 @@ def brute_force_steg(file_path, wordlist_path):
             if "wrote extracted data" in result.stdout.lower():
                 print(f"[+] Password cracked! --> {password}")
                 return password
-
-        except KeyboardInterrupt:
-            print("\n[!] User interrupted brute force.")
-            break
+        except Exception as e:
+            print(f"[!] Error: {e}")
 
     print("[-] Password not found.")
     return None
@@ -30,9 +28,9 @@ def brute_force_steg(file_path, wordlist_path):
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Steganography brute-force tool for Steghide.")
-    parser.add_argument("-f", "--file", required=True, help="Path to stego file (e.g., image.jpg)")
-    parser.add_argument("-w", "--wordlist", required=True, help="Path to wordlist file")
+    parser = argparse.ArgumentParser(description="Steghide password brute-forcer.")
+    parser.add_argument("-f", "--file", required=True, help="Path to steghide file (e.g., hidden.jpg)")
+    parser.add_argument("-w", "--wordlist", required=True, help="Path to wordlist (e.g., rockyou.txt)")
 
     args = parser.parse_args()
 
